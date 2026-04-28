@@ -1,36 +1,28 @@
 import { Bell } from 'lucide-react';
-import { mockData } from '../data/mockData';
+import { useAuthStore } from '../store/authStore';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export const AppHeader: React.FC = () => {
-  const { user } = mockData;
+  const user = useAuthStore((state) => state.user);
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-end px-8 sticky top-0 z-10">
-      <div className="flex items-center gap-6">
-        {/* XP Badge */}
-        <div className="flex items-center gap-2 bg-accent-300/20 px-3 py-1.5 rounded-full">
-          <div className="w-4 h-4 rounded-full bg-accent-500 flex items-center justify-center">
-            <span className="text-[10px] text-white font-bold">XP</span>
-          </div>
-          <span className="font-semibold text-accent-500 text-sm">
-            XP: {user.currentXp.toLocaleString()}
-          </span>
+    <header className="sticky top-0 z-10 border-b border-[color:var(--border)] bg-[var(--surface)]/95 px-6 py-4 backdrop-blur-xl shadow-sm shadow-slate-950/20">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <p className="text-sm uppercase tracking-[0.3em] text-[var(--muted)]">Selamat Datang</p>
+          <h1 className="mt-2 text-2xl font-semibold text-[var(--text)]">{user?.name ?? 'Pengguna'}</h1>
         </div>
-
-        {/* Notification Bell */}
-        <button className="text-gray-400 hover:text-gray-600 transition-colors relative">
-          <Bell className="w-5 h-5" />
-          <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-        </button>
-
-        {/* User Avatar */}
-        <button className="w-8 h-8 rounded-full overflow-hidden border-2 border-transparent hover:border-primary-500 transition-colors">
-          <img 
-            src={user.avatar} 
-            alt={user.name} 
-            className="w-full h-full object-cover"
-          />
-        </button>
+        <div className="flex flex-wrap items-center gap-4">
+          <ThemeToggle />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--text)] shadow-sm shadow-slate-950/10">
+            <span className="rounded-full bg-indigo-500 px-2 py-1 text-xs uppercase tracking-[0.25em] text-white">XP</span>
+            <span>{user?.xp ?? 0}</span>
+          </div>
+          <button className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] text-[var(--text)] transition hover:bg-white/5">
+            <Bell className="h-5 w-5" />
+            <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[var(--surface)]" />
+          </button>
+        </div>
       </div>
     </header>
   );

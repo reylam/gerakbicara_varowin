@@ -1,0 +1,776 @@
+{
+  "info": {
+    "name": "Gerak Bicara - BISINDO Learning Platform API",
+    "description": "Complete API collection for Gerak Bicara platform - Indonesian Sign Language Learning",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('auth_token', response.data.token);",
+                  "    pm.collectionVariables.set('user_id', response.data.user.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmad.rahman@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dashboard/stats",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Learning Paths",
+      "item": [
+        {
+          "name": "Get All Paths",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/sign-path/paths",
+              "host": ["{{base_url}}"],
+              "path": ["sign-path", "paths"]
+            }
+          }
+        },
+        {
+          "name": "Get Path Modules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/sign-path/paths/1/modules",
+              "host": ["{{base_url}}"],
+              "path": ["sign-path", "paths", "1", "modules"]
+            }
+          }
+        },
+        {
+          "name": "Get Module Lessons",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/sign-path/modules/1/lessons",
+              "host": ["{{base_url}}"],
+              "path": ["sign-path", "modules", "1", "lessons"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lessons",
+      "item": [
+        {
+          "name": "Get Lesson Detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/lesson-simulation/lessons/1",
+              "host": ["{{base_url}}"],
+              "path": ["lesson-simulation", "lessons", "1"]
+            }
+          }
+        },
+        {
+          "name": "Complete Lesson",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lesson_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/lesson-simulation/complete",
+              "host": ["{{base_url}}"],
+              "path": ["lesson-simulation", "complete"]
+            }
+          }
+        },
+        {
+          "name": "Get User Progress",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/progress",
+              "host": ["{{base_url}}"],
+              "path": ["user", "progress"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sign Dictionary",
+      "item": [
+        {
+          "name": "Get All Signs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/sign-pedia/signs",
+              "host": ["{{base_url}}"],
+              "path": ["sign-pedia", "signs"]
+            }
+          }
+        },
+        {
+          "name": "Search Signs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/sign-pedia/search?q=halo",
+              "host": ["{{base_url}}"],
+              "path": ["sign-pedia", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "halo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quizzes & Challenges",
+      "item": [
+        {
+          "name": "Get Lesson Quizzes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/challenge/lesson/1/quizzes",
+              "host": ["{{base_url}}"],
+              "path": ["challenge", "lesson", "1", "quizzes"]
+            }
+          }
+        },
+        {
+          "name": "Submit Quiz Answer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quiz_id\": 1,\n  \"selected_answer_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/challenge/submit",
+              "host": ["{{base_url}}"],
+              "path": ["challenge", "submit"]
+            }
+          }
+        },
+        {
+          "name": "Get User Quiz Attempts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/quiz-attempts",
+              "host": ["{{base_url}}"],
+              "path": ["user", "quiz-attempts"]
+            }
+          }
+        },
+        {
+          "name": "Get All Challenges",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/challenges",
+              "host": ["{{base_url}}"],
+              "path": ["challenges"]
+            }
+          }
+        },
+        {
+          "name": "Participate in Challenge",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/challenges/1/participate",
+              "host": ["{{base_url}}"],
+              "path": ["challenges", "1", "participate"]
+            }
+          }
+        },
+        {
+          "name": "Complete Challenge",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/challenges/1/complete",
+              "host": ["{{base_url}}"],
+              "path": ["challenges", "1", "complete"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Achievements",
+      "item": [
+        {
+          "name": "Get All Achievements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/achievements",
+              "host": ["{{base_url}}"],
+              "path": ["achievements"]
+            }
+          }
+        },
+        {
+          "name": "Get User Achievements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/my-achievements",
+              "host": ["{{base_url}}"],
+              "path": ["my-achievements"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Leaderboard",
+      "item": [
+        {
+          "name": "Get Top Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/leaderboard/top",
+              "host": ["{{base_url}}"],
+              "path": ["leaderboard", "top"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profile",
+              "host": ["{{base_url}}"],
+              "path": ["profile"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile",
+              "host": ["{{base_url}}"],
+              "path": ["profile"]
+            }
+          }
+        },
+        {
+          "name": "Get User Streak",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/user/streak",
+              "host": ["{{base_url}}"],
+              "path": ["user", "streak"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SignBot Chat",
+      "item": [
+        {
+          "name": "Get Chat History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/sign-bot/history",
+              "host": ["{{base_url}}"],
+              "path": ["sign-bot", "history"]
+            }
+          }
+        },
+        {
+          "name": "Send Message to SignBot",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Bagaimana cara mengucapkan halo dalam BISINDO?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/sign-bot/message",
+              "host": ["{{base_url}}"],
+              "path": ["sign-bot", "message"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Panel",
+      "item": [
+        {
+          "name": "Paths Management",
+          "item": [
+            {
+              "name": "Get All Paths (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/paths",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "paths"]
+                }
+              }
+            },
+            {
+              "name": "Create Path",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Advanced BISINDO\",\n  \"description\": \"Pelajari isyarat tingkat lanjut\",\n  \"order\": 2\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/paths",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "paths"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Modules Management",
+          "item": [
+            {
+              "name": "Get All Modules (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/modules",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "modules"]
+                }
+              }
+            },
+            {
+              "name": "Create Module",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path_id\": 1,\n  \"title\": \"Angka Lanjutan\",\n  \"description\": \"Pelajari angka 11-100\",\n  \"order\": 4\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/modules",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "modules"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Lessons Management",
+          "item": [
+            {
+              "name": "Get All Lessons (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/lessons",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "lessons"]
+                }
+              }
+            },
+            {
+              "name": "Create Lesson",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"module_id\": 1,\n  \"title\": \"Huruf D\",\n  \"content\": \"Pelajari bentuk isyarat untuk huruf D\",\n  \"difficulty\": \"easy\",\n  \"order\": 4\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/lessons",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "lessons"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Signs Management",
+          "item": [
+            {
+              "name": "Get All Signs (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/signs",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "signs"]
+                }
+              }
+            },
+            {
+              "name": "Create Sign",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"word\": \"Selamat Siang\",\n  \"description\": \"Isyarat untuk mengucapkan selamat siang\",\n  \"category\": \"Sapaan\",\n  \"model_3d_url\": \"https://example.com/models/selamat-siang.glb\",\n  \"video_url\": \"https://example.com/videos/selamat-siang.mp4\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/signs",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "signs"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Quizzes Management",
+          "item": [
+            {
+              "name": "Get All Quizzes (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/quizzes",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "quizzes"]
+                }
+              }
+            },
+            {
+              "name": "Create Quiz",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lesson_id\": 1,\n  \"question\": \"Huruf 'B' dalam BISINDO ditandai dengan:\",\n  \"type\": \"mcq\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/quizzes",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "quizzes"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Achievements Management",
+          "item": [
+            {
+              "name": "Get All Achievements (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/achievements",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "achievements"]
+                }
+              }
+            },
+            {
+              "name": "Create Achievement",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Master Bahasa\",\n  \"description\": \"Menyelesaikan semua pelajaran bahasa isyarat\",\n  \"xp_reward\": 150\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/achievements",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "achievements"]
+                }
+              }
+            },
+            {
+              "name": "Award Achievement",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": 2,\n  \"achievement_id\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/achievements/award",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "achievements", "award"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Challenges Management",
+          "item": [
+            {
+              "name": "Get All Challenges (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/challenges",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "challenges"]
+                }
+              }
+            },
+            {
+              "name": "Create Challenge",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Tantangan Mingguan\",\n  \"description\": \"Selesaikan 5 pelajaran dalam seminggu\",\n  \"xp_reward\": 50\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/challenges",
+                  "host": ["{{base_url}}"],
+                  "path": ["admin", "challenges"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

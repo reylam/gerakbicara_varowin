@@ -3,16 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Achievement extends Model
 {
-    protected $fillable = ['title', 'description', 'xp_reward'];
+    protected $fillable = ['title', 'description', 'xp_reward', 'icon'];
 
-    public function users(): BelongsToMany
+    public function userAchievements(): HasMany
     {
-        return $this->belongsToMany(User::class, 'user_achievements')
-            ->withPivot('earned_at')
-            ->withTimestamps();
+        return $this->hasMany(UserAchievement::class);
     }
 }

@@ -2,7 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+  --bg: #020617;
+  --surface: rgba(15, 23, 42, 0.95);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.16);
+  --accent: #1e40af;
+  --accent-2: #4a7c8e;
+  --accent-3: #fab95b;
+}
+
+.light {
+  color-scheme: light;
+  --bg: #f6f4f0;
+  --surface: rgba(255, 255, 255, 0.92);
+  --text: #475569;
+  --muted: #64748b;
+  --border: rgba(148, 163, 184, 0.24);
+  --accent: #1e40af;
+  --accent-2: #4a7c8e;
+  --accent-3: #fab95b;
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #020617;
+  --surface: rgba(15, 23, 42, 0.95);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.16);
+  --accent: #1e40af;
+  --accent-2: #4a7c8e;
+  --accent-3: #fab95b;
+}
+
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: theme('colors.background');
+  min-height: 100vh;
+  margin: 0;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 28%),
+    radial-gradient(
+      circle at bottom right,
+      rgba(59, 130, 246, 0.12),
+      transparent 20%
+    ),
+    var(--bg);
+  color: var(--text);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(30, 64, 175, 0.3);
+  color: inherit;
 }
