@@ -12,11 +12,11 @@ const applyTheme = (value: ThemeMode) => {
 };
 
 export const ThemeToggle: React.FC = () => {
-  const [theme, setTheme] = useState<ThemeMode>('dark');
+  const [theme, setTheme] = useState<ThemeMode>('light');
 
   useEffect(() => {
     const stored = localStorage.getItem(THEME_KEY) as ThemeMode | null;
-    const nextTheme = stored ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const nextTheme = stored ?? 'light';
     setTheme(nextTheme);
     applyTheme(nextTheme);
   }, []);

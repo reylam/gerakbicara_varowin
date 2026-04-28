@@ -5,13 +5,13 @@ import App from './App.tsx';
 
 const getInitialTheme = () => {
   if (typeof window === 'undefined') {
-    return 'dark';
+    return 'light';
   }
   const storedTheme = localStorage.getItem('gerak_theme');
   if (storedTheme === 'light' || storedTheme === 'dark') {
     return storedTheme;
   }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return 'light';
 };
 
 document.documentElement.classList.add(getInitialTheme());
