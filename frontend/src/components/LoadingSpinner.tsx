@@ -1,7 +1,12 @@
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 export const LoadingSpinner: React.FC = () => {
   return (
-    <div className="flex items-center justify-center py-14">
-      <div className="h-12 w-12 rounded-full border-4 border-primary-200 border-t-primary-600 animate-spin"></div>
+    <div className="space-y-3 rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-5">
+      <Skeleton height={16} baseColor="#cbd5e1" highlightColor="#e2e8f0" />
+      <Skeleton height={16} width="85%" baseColor="#cbd5e1" highlightColor="#e2e8f0" />
+      <Skeleton height={16} width="75%" baseColor="#cbd5e1" highlightColor="#e2e8f0" />
     </div>
   );
 };

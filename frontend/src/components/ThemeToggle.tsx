@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { useLocalStorage } from 'react-use';
 
 const THEME_KEY = 'gerak_theme';
 
@@ -12,14 +13,13 @@ const applyTheme = (value: ThemeMode) => {
 };
 
 export const ThemeToggle: React.FC = () => {
-  const [theme, setTheme] = useState<ThemeMode>('light');
+  const [storedTheme, setStoredTheme] = useLocalStorage<ThemeMode>(THEME_KEY, 'light');
+  const [theme, setTheme] = useState<ThemeMode>(storedTheme ?? 'light');
 
   useEffect(() => {
-    const stored = localStorage.getItem(THEME_KEY) as ThemeMode | null;
-    const nextTheme = stored ?? 'light';
-    setTheme(nextTheme);
-    applyTheme(nextTheme);
-  }, []);
+    applyTheme(theme);
+    setStoredTheme(theme);
+  }, [theme, setStoredTheme]);
 
   const handleToggle = () => {
     const nextTheme: ThemeMode = theme === 'dark' ? 'light' : 'dark';
@@ -31,10 +31,10 @@ export const ThemeToggle: React.FC = () => {
     <button
       type="button"
       onClick={handleToggle}
-      className="inline-flex items-center gap-2 rounded-full border border-slate-700/70 bg-slate-900/80 px-4 py-2 text-sm text-slate-200 transition hover:bg-slate-900"
+      className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--text)] transition hover:brightness-95"
     >
       {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-      {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+      {theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
     </button>
   );
 };

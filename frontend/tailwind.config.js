@@ -5,19 +5,26 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          500: '#3b82f6',
-          800: '#1e40af',
+          50: '#f0f7fc',
+          100: '#d6e8f5',
+          500: '#1e71b7',
+          800: '#155583',
+        },
+        secondary: {
+          100: '#d2e4e9',
+          500: '#4a7c8e',
+        },
+        tertiary: {
+          500: '#d6e8f5',
         },
         accent: {
-          300: '#fcd34d',
-          500: '#f59e0b',
+          300: '#ffd79c',
+          500: '#fab95b',
         },
         success: {
           500: '#10b981',
         },
-        background: '#f3f4f6',
+        background: '#f6f4f0',
       },
       keyframes: {
         'pulse-slow': {

@@ -11,7 +11,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().token;
+  const token = useAuthStore.getState().token ?? localStorage.getItem('token') ?? localStorage.getItem('gerak_token');
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -23,6 +23,7 @@ api.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       useAuthStore.getState().logout();
+      localStorage.removeItem('token');
       window.location.href = '/';
     }
     return Promise.reject(error);

@@ -19,7 +19,7 @@ export const RequireAuth: React.FC<RequireAuthProps> = ({ children }) => {
     if (token && !user) {
       setLoading(true);
       fetchMe()
-        .then((response: any) => {
+        .then((response) => {
           if (response.data.success) {
             setUser(response.data.data.user);
           }

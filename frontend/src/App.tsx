@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Lenis from '@studio-freight/lenis';
 import { MainLayout } from './layouts/MainLayout';
 import { PublicLayout } from './layouts/PublicLayout';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -14,8 +16,46 @@ import { Challenge } from './pages/Challenge';
 import { Leaderboard } from './pages/Leaderboard';
 import { Profile } from './pages/Profile';
 import { NotFound } from './pages/NotFound';
+import { useAuthStore } from './store/authStore';
+import { fetchMe } from './api/auth';
 
 function App() {
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
+  const logout = useAuthStore((state) => state.logout);
+
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token') || localStorage.getItem('gerak_token');
+
+    if (!user && token) {
+      fetchMe()
+        .then((response) => {
+          if (response.data.success) {
+            setUser(response.data.data.user);
+          } else {
+            logout();
+            window.location.href = '/';
+          }
+        })
+        .catch(() => {
+          logout();
+          window.location.href = '/';
+        });
+    }
+  }, [user, setUser, logout]);
+
   return (
     <BrowserRouter>
       <Routes>

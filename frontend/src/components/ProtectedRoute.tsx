@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
 export const ProtectedRoute: React.FC = () => {
-  const token = useAuthStore((state) => state.token);
+  const token = useAuthStore((state) => state.token) ?? localStorage.getItem('token') ?? localStorage.getItem('gerak_token');
   const location = useLocation();
 
   if (!token) {

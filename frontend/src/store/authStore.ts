@@ -23,16 +23,19 @@ interface AuthState {
 
 const initialToken = typeof window !== 'undefined' ? localStorage.getItem('gerak_token') : null;
 const initialUser = typeof window !== 'undefined' ? localStorage.getItem('gerak_user') : null;
+const legacyToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
 export const useAuthStore = create<AuthState>((set) => ({
-  token: initialToken,
+  token: initialToken ?? legacyToken,
   user: initialUser ? JSON.parse(initialUser) : null,
   loading: false,
   setToken: (token) => {
     if (token) {
       localStorage.setItem('gerak_token', token);
+      localStorage.setItem('token', token);
     } else {
       localStorage.removeItem('gerak_token');
+      localStorage.removeItem('token');
     }
     set({ token });
   },
@@ -48,6 +51,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('gerak_token');
+      localStorage.removeItem('token');
       localStorage.removeItem('gerak_user');
     }
     set({ token: null, user: null });

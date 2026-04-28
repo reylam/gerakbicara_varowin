@@ -30,35 +30,35 @@ export const Leaderboard: React.FC = () => {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-      <div className="rounded-3xl border border-slate-700/60 bg-slate-950/90 p-8 shadow-xl shadow-slate-950/20">
+      <div className="rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-8 shadow-xl shadow-slate-950/10">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-sky-400/80">Leaderboard</p>
-            <h2 className="mt-3 text-3xl font-bold text-white">Ranking pengguna teratas</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-[#4a7c8e]">Leaderboard</p>
+            <h2 className="mt-3 text-3xl font-bold text-[var(--text)]">Ranking pengguna teratas</h2>
           </div>
-          <p className="max-w-xl text-slate-400">Lihat siapa yang memimpin papan peringkat dan raih XP lebih banyak dengan latihan harian.</p>
+          <p className="max-w-xl text-[var(--muted)]">Lihat siapa yang memimpin papan peringkat dan raih XP lebih banyak dengan latihan harian.</p>
         </div>
       </div>
 
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
-        <p className="text-center text-slate-300">{error}</p>
+        <p className="text-center text-[var(--muted)]">{error}</p>
       ) : (
         <div className="grid gap-4">
           {entries.map((user) => (
             <motion.div
               key={user.id}
               whileHover={{ y: -4 }}
-              className="rounded-3xl border border-slate-700/60 bg-slate-950/90 p-6 shadow-lg shadow-slate-950/10"
+              className="rounded-3xl border border-[color:var(--border)] bg-[var(--surface)] p-6 shadow-lg shadow-slate-950/10"
             >
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm text-slate-400">Rank {user.rank}</p>
-                  <h3 className="mt-1 text-2xl font-semibold text-white">{user.name}</h3>
-                  <p className="mt-2 text-slate-400">Level {user.level} • {user.xp} XP</p>
+                  <p className="text-sm text-[var(--muted)]">Rank {user.rank}</p>
+                  <h3 className="mt-1 text-2xl font-semibold text-[var(--text)]">{user.name}</h3>
+                  <p className="mt-2 text-[var(--muted)]">Level {user.level} • {user.xp} XP</p>
                 </div>
-                <div className="rounded-3xl bg-gradient-to-r from-indigo-500 to-sky-500 px-4 py-2 text-sm font-semibold text-white">
+                <div className="rounded-3xl bg-[#1e71b7] px-4 py-2 text-sm font-semibold text-white">
                   #{user.rank}
                 </div>
               </div>
