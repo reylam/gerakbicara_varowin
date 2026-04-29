@@ -1,4 +1,4 @@
-import { Bell } from 'lucide-react';
+import { Bell, Flame, Zap } from 'lucide-react';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
 import { useAuthStore } from '../store/authStore';
@@ -15,16 +15,37 @@ export const AppHeader: React.FC = () => {
           <h1 className="mt-2 text-2xl font-semibold text-[var(--text)]">{user?.name ?? 'Pengguna'}</h1>
           <p className="mt-1 text-xs text-[var(--muted)]">{format(new Date(), 'EEEE, d MMMM yyyy', { locale: id })}</p>
         </div>
-        <div className="flex flex-wrap items-center gap-4">
+
+        <div className="flex items-center gap-3">
           <ThemeToggle />
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#ffe7be] bg-[#fff7e6] px-4 py-2 text-sm text-[#a16e16] shadow-sm shadow-slate-950/10">
-            <span className="rounded-full bg-[#fab95b] px-2 py-1 text-xs uppercase tracking-[0.25em] text-white">XP</span>
-            <span>{user?.xp ?? 0}</span>
-          </div>
-          <button className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[color:var(--border)] bg-[var(--surface)] text-[var(--text)] transition hover:bg-white/5">
-            <Bell className="h-5 w-5" />
-            <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[var(--surface)]" />
-          </button>
+            <div className="inline-flex items-center rounded-full 
+                            border border-orange-200/60 
+                            bg-orange-50/60 
+                            px-3 py-1.5 
+                            text-sm font-semibold 
+                            text-orange-600
+                            dark:bg-orange-950/30 
+                            dark:border-orange-800/40 
+                            dark:text-orange-300">
+              <Flame className="w-4 h-4 mr-1.5" />
+              <span>{(user as any)?.streak ?? 7}</span>
+            </div>
+            <div className="inline-flex items-center rounded-full 
+                            border border-amber-200/0 
+                            bg-amber-50/0
+                            px-3 py-1.5 
+                            text-sm font-semibold 
+                            text-amber-700
+                            dark:bg-amber-950/30 
+                            dark:border-amber-800/40 
+                            dark:text-amber-300">
+              <Zap className="w-4 h-4 mr-1.5" />
+              <span>{user?.xp ? user.xp.toLocaleString() + ' XP' : '1,250 XP'}</span>
+            </div>
+            <button className="relative p-2 rounded-full text-white transition bg-[#1e71b7] hover:bg-[#1a5fa0] dark:bg-[#2980c9] dark:hover:bg-[#3d92db]">
+              <Bell className="w-5 h-5" />
+            <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[var(--surface)]" />
+            </button>
         </div>
       </div>
     </header>

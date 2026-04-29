@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Flame } from 'lucide-react';
 import { getDashboardStats } from '../api/dashboard';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
@@ -52,13 +53,20 @@ export const Dashboard: React.FC = () => {
             {[
               { label: 'XP', value: stats.xp },
               { label: 'Level', value: stats.level },
-              { label: 'Streak', value: `${stats.streak.current} hari` },
             ].map((card) => (
               <div key={card.label} className="rounded-3xl border border-[color:var(--border)] bg-[var(--bg)] p-5">
                 <p className="text-sm uppercase tracking-[0.3em] text-[var(--muted)]">{card.label}</p>
                 <p className="mt-3 text-3xl font-semibold text-[var(--text)]">{card.value}</p>
               </div>
             ))}
+            <div className="rounded-3xl border border-[color:var(--border)] bg-[var(--bg)] p-5">
+              <p className="text-sm uppercase tracking-[0.3em] text-[var(--muted)]">Streak</p>
+              <p className="mt-3 flex items-center gap-2 text-3xl font-semibold text-[var(--text)]">
+                {stats.streak.current}
+                <Flame className="h-7 w-7 text-orange-500" />
+                <span className="text-lg font-normal text-[var(--muted)]">hari</span>
+              </p>
+            </div>
           </div>
 
           <div className="mt-10 rounded-3xl border border-[#d6e8f5] bg-gradient-to-r from-[#2c7cc0] to-[#1e71b7] p-6 text-white">

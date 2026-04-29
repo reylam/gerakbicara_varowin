@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Lottie from 'lottie-react';
+// import Lottie from 'lottie-react';
 import { Sparkles, Layers, MessageCircle, TrendingUp } from 'lucide-react';
 import { FaGamepad, FaHandsHelping } from 'react-icons/fa';
 import { ROUTES } from '../utils/routes';
 import gerakBicaraLogo from '../assets/gerakbicara.png';
-import { lottiePulse } from '../utils/lottiePulse';
+// import { lottiePulse } from '../utils/lottiePulse';
 
 const features = [
   {
@@ -113,7 +113,7 @@ export const Landing: React.FC = () => {
               <div className="mx-auto flex h-48 w-48 items-center justify-center rounded-3xl bg-gradient-to-br from-[#1e71b7] to-[#4a7c8e] text-white shadow-inner shadow-slate-950/20">
                 <div className="space-y-3 text-center">
                   <div className="mx-auto h-14 w-14">
-                    <Lottie animationData={lottiePulse} loop autoplay />
+                    <div className="w-full h-full rounded-full bg-white/40 animate-pulse" />
                   </div>
                   <p className="text-sm font-semibold">3D Gesture Hub</p>
                   <p className="max-w-xs text-[13px] text-white/75">Visualisasi interaktif untuk setiap pelajaran.</p>
