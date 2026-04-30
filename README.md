@@ -7,16 +7,16 @@ Repositori ini terdiri dari dua bagian utama:
 **Catatan:**
 Backend menggunakan Laravel versi 12.
 
-Ikuti langkah-langkah berikut untuk menjalankan project ini di lingkungan lokal Anda.
+Ikuti langkah-langkah berikut untuk menjalankan project ini:
 
 ---
 
-## 1. Persiapan Umum
+## 1. Tech Stack
 
-Pastikan Anda telah menginstall:
-- Node.js (disarankan versi terbaru LTS)
-- Composer (untuk dependency PHP)
-- PHP (minimal versi 8.1)
+Pastikan sudah menginstall:
+- Node.js
+- Composer (Dependency PHP)
+- PHP (minimal versi 8.2)
 - MySQL/MariaDB (atau database lain yang didukung Laravel)
 - Git
 
@@ -40,7 +40,7 @@ cp .env.example .env
 
 ### b. Install Dependency
 
-Jalankan perintah berikut untuk menginstall dependency PHP:
+Jalankan code ini di terminal untuk menginstall semua dependency PHP:
 
 ```bash
 composer install
@@ -54,7 +54,7 @@ php artisan key:generate
 
 ### d. Konfigurasi Database
 
-Edit file `.env` dan sesuaikan konfigurasi database sesuai dengan lingkungan Anda.
+Edit file .env dan konfigurasi database name dengan VaroWin.
 
 ### e. Jalankan Migrasi Database
 
@@ -94,16 +94,7 @@ npm run dev
 
 ## 4. Akses Aplikasi
 
-- Backend biasanya berjalan di: `http://localhost:8000`
-- Frontend biasanya berjalan di: `http://localhost:5173` (atau sesuai output terminal)
+- Pastikan Backend berjalan/running di: http://localhost:8000
+- astikan Frontend berjalan/running di: http://localhost:5173
 
 ---
-
-## 5. Catatan
-
-- Pastikan backend sudah berjalan sebelum mengakses frontend.
-- Jika terjadi error, pastikan seluruh dependency sudah terinstall dan konfigurasi sudah benar.
-
----
-
-Jika ada pertanyaan lebih lanjut, silakan hubungi pengelola repositori ini.
