@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 // import Lottie from 'lottie-react';
 import { Sparkles, Layers, MessageCircle, TrendingUp } from 'lucide-react';
@@ -243,7 +243,7 @@ export const Landing: React.FC = () => {
       </section>
 
       <footer className="border-t border-[color:var(--border)] pt-10 text-center text-sm text-[var(--muted)]">
-        <p>Gerak Bicara © 2026 — Platform pembelajaran bahasa isyarat modern dan inklusif.</p>
+        <p>Gerak Bicara © 2026 | Platform pembelajaran bahasa isyarat modern dan inklusif.</p>
       </footer>
     </div>
   );
